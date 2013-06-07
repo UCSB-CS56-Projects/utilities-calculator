@@ -19,6 +19,18 @@ public class CalculatorGUI extends JFrame{
     private JTextField displayField; // Displays our input and output
     private Calculator calculator = new Calculator(); // This is what will be peforming our actual operations
 
+    private boolean startNumber = true; 
+    private String previousOperation = "="; //previous operation 
+    private boolean decimalPoint = false; //We don't start with a decimal point
+
+    /** Reset is called by clear button action listener and elsewhere.*/
+    private void reset() {
+        startNumber = true;  
+	decimalPoint = false;
+        displayField.setText("0");
+        previousOperation  = "=";
+        calculator.setTotal("0");
+    }
 
     /** Constructor for CalculatorGUI class.
 
@@ -126,6 +138,26 @@ public class CalculatorGUI extends JFrame{
      */
     class NumListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
+	    String digit = e.getActionCommand(); //get our text from button
+
+	    if (digit.equals(".") && !decimalPoint)
+		return; 
+	    
+	    else if ( startNumber ){ //Is this the first number?
+		//this is the first digit, so clear our field and set
+		displayField.setText(digit);
+		startNumber = false; //Now it's not our start number
+		if (digit.equals("."))
+		    decimalPoint = true; //To prevent two decimal points in input
+	    }
+
+	    else {
+		//Add our new digit to the end
+		displayField.setText(displayField.getText() + digit);
+                if (digit.equals("."))
+                    decimalPoint = true; //To prevent two decimal points in input
+
+	    }
 	}
     }
 
@@ -148,6 +180,44 @@ public class CalculatorGUI extends JFrame{
      */
     class OperatorListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
+	    // The calculator is always in one of two states. We are expecting a number, or an operator.
+
+            if (startNumber) { // Error message if we got an operator without a number
+                //Expected a number, but got an operator.
+                reset();
+                displayField.setText("ERROR - No operator");
+            } else {
+                //Then we expect an operator.
+                startNumber = true;  // Next thing we enter has to be a number
+		decimalPoint = false; // Reset because it's a new number that must be entered next
+
+                try {
+                    // Get value from display field, convert, do prev op
+                    // If this is the first op, _previousOp will be =.
+                    String displayText = displayField.getText();
+                    
+                    if (previousOperation.equals("=")) {
+                        calculator.setTotal(displayText);
+                    } else if (previousOperation.equals("+")) {
+                        calculator.add(displayText);
+                    } else if (previousOperation.equals("-")) {
+                        calculator.subtract(displayText);
+                    } else if (previousOperation.equals("*")) {
+                        calculator.multiply(displayText);
+                    } else if (previousOperation.equals("/")) {
+                        calculator.divide(displayText);
+                    }
+                    
+                    displayField.setText("" + calculator.getTotalString());
+                    
+                } catch (NumberFormatException ex) {
+                    reset();
+                    displayField.setText("Error");
+                }
+                
+                //Now we set previousOperation for the next operator.
+                previousOperation = e.getActionCommand();
+            }
 
 	}
     }

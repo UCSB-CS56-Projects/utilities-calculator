@@ -24,9 +24,11 @@ public class Calculator{
 totalString converts our double total into a string
      */
 
-    public String totalString(){
+    public String getTotalString(){
 	return "" + total;
     }
+
+
 
     /** setTotal sets total to number given a string */
 

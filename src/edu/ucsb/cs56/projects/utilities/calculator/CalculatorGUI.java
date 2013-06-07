@@ -30,7 +30,7 @@ public class CalculatorGUI extends JFrame{
         displayField = new JTextField("0", 12);
         displayField.setHorizontalAlignment(JTextField.RIGHT);
         displayField.setFont(BIGGER_FONT);
-
+	displayField.setEditable(false);
 
 	JPanel buttonPanel = new JPanel(); //Where our numberic buttons will be including '.' and '+-'
 	JPanel operatorPanel = new JPanel(); //Where our operators /, *, -, + will be

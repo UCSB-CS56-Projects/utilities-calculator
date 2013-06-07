@@ -1,4 +1,4 @@
-utilities-calculator
-====================
+cs56-utilities-calculator
+=========================
 
-A GUI Calculator
+A graphical calculator written in Java that performs basic operations including addition, multiplication, subtraction and division. 

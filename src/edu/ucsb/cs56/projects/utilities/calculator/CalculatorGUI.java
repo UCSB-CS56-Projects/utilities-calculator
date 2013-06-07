@@ -4,7 +4,8 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 
-/** CalculatorGUI class which is a user interface for a calculator. This is only the main method, which brings up the window for the calculator. 
+/** CalculatorGUI class which is a user interface for a calculator. 
+ 
 
 @author Roeland Singer-Heinze
 @version CS56, S13, UCSB
@@ -106,8 +107,8 @@ public class CalculatorGUI extends JFrame{
 	JPanel content = new JPanel();
 	content.setLayout(new BorderLayout(5,5));
 	content.add(displayField, BorderLayout.NORTH);
-	content.add(buttonPanel, BorderLayout.CENTER);
-	content.add(operatorPanel,BorderLayout.EAST);
+	content.add(buttonPanel, BorderLayout.WEST);
+	content.add(operatorPanel,BorderLayout.CENTER);
 	content.add(keyPanel,BorderLayout.EAST);
 
 	content.setBorder(BorderFactory.createEmptyBorder(10,10,10,10)); 
@@ -118,7 +119,7 @@ public class CalculatorGUI extends JFrame{
 	this.setTitle("Calculator");
 	this.setResizable(false);
 	this.setLocationRelativeTo(null);
-    }// end of our construct
+    }// end of our constructor
 
 
     /**Action listener for number keys and .

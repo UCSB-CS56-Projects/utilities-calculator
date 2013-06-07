@@ -11,7 +11,7 @@
    <property name="javadocDest" value="${webRoot}/${projectName}/javadoc" /> 
    <property name="javadocURL" value="${webBaseURL}/${projectName}/javadoc" /> 
    <property name="javadocLink" value="http://java.sun.com/javase/7/docs/api/" />
-
+   <property name="packagePrefix" value="edu.ucsb.cs56.projects.utilities.calculator" />
 
 <path id="project.class.path">
          <pathelement location="build"/>
@@ -26,6 +26,12 @@
    </javac>       
   </target>
 
+
+<target name="run" depends="compile" description="run the project">
+
+  <java classname="${packagePrefix}.CalculatorGUI" classpathref="project.class.path" fork="true"/>
+   
+</target>
 
   <target name="clean" description="delete unnecessary files and directories">
     <delete dir="build" quiet="true" />

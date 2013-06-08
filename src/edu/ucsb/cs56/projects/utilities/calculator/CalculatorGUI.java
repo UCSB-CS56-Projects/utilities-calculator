@@ -165,6 +165,19 @@ public class CalculatorGUI extends JFrame{
      */
     class PlusMinusListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
+	    String s = displayField.getText();
+
+	    if ( s.equals("0"))
+		return;
+
+	    else if ( s.substring(0, 1).equals("-") )
+		s = s.substring(1, s.length());
+	    else 
+		s = "-" + s;
+
+
+	    displayField.setText(s);
+
 	}
     }
 
@@ -172,6 +185,13 @@ public class CalculatorGUI extends JFrame{
      */
     class InverseListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
+
+
+	    String s = displayField.getText();
+	    double x = 1 / Double.parseDouble(s);
+	    displayField.setText("" + x);
+
+
 
 	}
     }
@@ -182,13 +202,13 @@ public class CalculatorGUI extends JFrame{
         public void actionPerformed(ActionEvent e) {
 	    // The calculator is always in one of two states. We are expecting a number, or an operator.
 
-            if (startNumber) { // Error message if we got an operator without a number
+            if (startNumber && ! previousOperation.equals("=")) { // Error message if we got an operator without a number unless it is equals
                 //Expected a number, but got an operator.
                 reset();
                 displayField.setText("ERROR - No operator");
             } else {
                 //Then we expect an operator.
-                startNumber = true;  // Next thing we enter has to be a number
+		startNumber = true;  // Next thing we enter has to be a number
 		decimalPoint = false; // Reset because it's a new number that must be entered next
 
                 try {
@@ -228,7 +248,25 @@ public class CalculatorGUI extends JFrame{
     class delListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
 
-        }
+	    if (startNumber)
+		return; //do nothing
+
+	    else {
+		String s = displayField.getText();
+		if (s.length() == 1){
+		    reset(); // just reset it
+		    return;
+		}
+
+		if ( s.substring(s.length() - 1, s.length()).equals("."))
+		    decimalPoint = false;
+
+		displayField.setText(s.substring(0, s.length() - 1)); // delete the last thing entered
+		
+
+	    }
+				      
+	}
     }
 
     /**Action listener for clear button
@@ -237,6 +275,7 @@ public class CalculatorGUI extends JFrame{
     class ClearListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
 
+	    reset();
 	}
     }
 
@@ -250,6 +289,6 @@ public class CalculatorGUI extends JFrame{
 
     }
 
-
+    
 
 }

@@ -6,5 +6,5 @@ A graphical calculator written in Java that performs basic operations including 
 project history
 ===============
 ```
- N/A
+YES | mastergberry | A GUI Calculator
 ```

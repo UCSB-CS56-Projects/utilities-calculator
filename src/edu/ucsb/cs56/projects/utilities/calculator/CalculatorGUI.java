@@ -148,7 +148,9 @@ public class CalculatorGUI extends JFrame{
 		displayField.setText(digit);
 		startNumber = false; //Now it's not our start number
 		if (digit.equals("."))
+		    displayField.setText(displayField.getText() + ".");
 		    decimalPoint = true; //To prevent two decimal points in input
+		   
 	    }
 
 	    else {
@@ -156,6 +158,8 @@ public class CalculatorGUI extends JFrame{
 		displayField.setText(displayField.getText() + digit);
                 if (digit.equals("."))
                     decimalPoint = true; //To prevent two decimal points in input
+
+        
 
 	    }
 	}

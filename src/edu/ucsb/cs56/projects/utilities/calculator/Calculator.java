@@ -1,6 +1,7 @@
 package edu.ucsb.cs56.projects.utilities.calculator;
 import java.awt.*;
 import javax.swing.*;
+import java.lang.Math;
 
 /** Calculator class is the implementation of a simple calculator which peforms addition, subtraction, division, and multiplication, inverse, and any other calculator operations.
 
@@ -59,5 +60,6 @@ totalString converts our double total into a string
     public void divide(String n){
 	total /= Double.parseDouble(n);
     }
+
 
 }

@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
-
+import java.lang.Math;
 /** CalculatorGUI class which is a user interface for a calculator. 
  
 
@@ -86,23 +86,39 @@ public class CalculatorGUI extends JFrame{
 
 	//add buttons for extra panel, which include sin, cos, tan, x^2
 	extraPanel.setLayout(new GridLayout(1, 5, 2, 2));
+
+	//add button for sin
+	ActionListener sinListener = new SinListener();
 	JButton sin = new JButton("Sin");
+	sin.addActionListener(sinListener);
 	extraPanel.add(sin);
 	sin.setFont(BIGGER_FONT);
 
+	//add button for cos
+	ActionListener cosListener = new CosListener();
 	JButton cos = new JButton("Cos");
+	cos.addActionListener(cosListener);
 	extraPanel.add(cos);
 	cos.setFont(BIGGER_FONT);
-
+	
+	//add button for tan
+	ActionListener tanListener = new TanListener();
 	JButton tan = new JButton("Tan");
+	tan.addActionListener(tanListener);
 	extraPanel.add(tan);
 	tan.setFont(BIGGER_FONT);
-
+	
+	//add button for x2
+	ActionListener x2Listener = new X2Listener();
 	JButton x2 = new JButton("x2");
+	x2.addActionListener(x2Listener);
 	extraPanel.add(x2);
 	x2.setFont(BIGGER_FONT);
 
+	//add button for sqrt
+	ActionListener sqrtListener = new SqrtListener();
 	JButton sqrt = new JButton("sqrt");
+	sqrt.addActionListener(sqrtListener);
 	extraPanel.add(sqrt);
 	sqrt.setFont(BIGGER_FONT);
 
@@ -156,6 +172,53 @@ public class CalculatorGUI extends JFrame{
 	this.setResizable(false);
 	this.setLocationRelativeTo(null);
     }// end of our constructor
+		
+
+		/**Action listener for sin */
+	 	class SinListener implements ActionListener{
+				public void actionPerformed(ActionEvent e){
+						String s = displayField.getText();
+						double x = Math.sin(Double.parseDouble(s));
+						displayField.setText("" + x);
+				}
+		}
+		
+		/**Action listener for cos*/
+		class CosListener implements ActionListener{
+				public void actionPerformed(ActionEvent e){
+						String s = displayField.getText();
+						double x = Math.cos(Double.parseDouble(s));
+						displayField.setText("" + x);
+				}
+		}
+
+		/**Action listner for tan*/
+		class TanListener implements ActionListener{
+				public void actionPerformed(ActionEvent e){
+						String s = displayField.getText();
+						double x = Math.tan(Double.parseDouble(s));
+						displayField.setText("" + x);
+				}
+		}
+
+
+		/**Action listener for x^2 */
+		class X2Listener implements ActionListener{
+				public void actionPerformed(ActionEvent e){
+						String s = displayField.getText();
+						double x = Double.parseDouble(s)*Double.parseDouble(s);
+						displayField.setText("" + x);
+				}
+		}
+	
+		/**Action listener for sqrt*/
+		class SqrtListener implements ActionListener{
+				public void actionPerformed(ActionEvent e){
+						String s = displayField.getText();
+						double x = Math.sqrt(Double.parseDouble(s));
+						displayField.setText("" + x);
+				}
+		}
 
 
     /**Action listener for number keys and .

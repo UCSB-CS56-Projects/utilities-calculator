@@ -47,6 +47,7 @@ public class CalculatorGUI extends JFrame{
 	JPanel buttonPanel = new JPanel(); //Where our numberic buttons will be including '.' and '+-'
 	JPanel operatorPanel = new JPanel(); //Where our operators /, *, -, + will be
 	JPanel keyPanel = new JPanel(); //Where our =, del, and c (clear) keys will be and 1/x as well
+	JPanel extraPanel = new JPanel(); // where sin, cos, tan, x^2
 
         //add buttons for 1 through 9
 	ActionListener numListener = new NumListener(); //This is for all numeric buttons and '.'
@@ -82,6 +83,28 @@ public class CalculatorGUI extends JFrame{
 	    operatorPanel.add(jb);
 	}
 
+
+	//add buttons for extra panel, which include sin, cos, tan, x^2
+	extraPanel.setLayout(new GridLayout(1, 5, 2, 2));
+	JButton sin = new JButton("Sin");
+	extraPanel.add(sin);
+	sin.setFont(BIGGER_FONT);
+
+	JButton cos = new JButton("Cos");
+	extraPanel.add(cos);
+	cos.setFont(BIGGER_FONT);
+
+	JButton tan = new JButton("Tan");
+	extraPanel.add(tan);
+	tan.setFont(BIGGER_FONT);
+
+	JButton x2 = new JButton("x2");
+	extraPanel.add(x2);
+	x2.setFont(BIGGER_FONT);
+
+	JButton sqrt = new JButton("sqrt");
+	extraPanel.add(sqrt);
+	sqrt.setFont(BIGGER_FONT);
 
 	//add buttons for key panel, which includes 1/x
 	keyPanel.setLayout(new GridLayout(4, 1, 2, 2));
@@ -122,6 +145,7 @@ public class CalculatorGUI extends JFrame{
 	content.add(buttonPanel, BorderLayout.WEST);
 	content.add(operatorPanel,BorderLayout.CENTER);
 	content.add(keyPanel,BorderLayout.EAST);
+	content.add(extraPanel,BorderLayout.SOUTH);
 
 	content.setBorder(BorderFactory.createEmptyBorder(10,10,10,10)); 
 
@@ -148,7 +172,7 @@ public class CalculatorGUI extends JFrame{
 		displayField.setText(digit);
 		startNumber = false; //Now it's not our start number
 		if (digit.equals("."))
-		    displayField.setText(displayField.getText() + ".");
+				displayField.setText(displayField.getText() + ".");
 		    decimalPoint = true; //To prevent two decimal points in input
 		   
 	    }

@@ -3,8 +3,8 @@ package edu.ucsb.cs56.projects.utilities.calculator;
 
 /**
  *The Test class for CalculatorGUI Class
- *@author Roeland Singer-Heinze
- *@version CS56, 13S, proj3
+ *@author Fengyu Wang
+ *@version CS56, W15, proj
  *@see Calculator
  */
 

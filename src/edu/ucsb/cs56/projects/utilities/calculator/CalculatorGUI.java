@@ -7,8 +7,8 @@ import java.lang.Math;
 /** CalculatorGUI class which is a user interface for a calculator. 
  
 
-@author Roeland Singer-Heinze
-@version CS56, S13, UCSB
+@author Fengyu Wang
+@version CS56, W15, UCSB
 
  */
 
@@ -85,32 +85,32 @@ public class CalculatorGUI extends JFrame{
 
 
 	//add buttons for extra panel, which include sin, cos, tan, x^2
-	extraPanel.setLayout(new GridLayout(1, 5, 2, 2));
+	extraPanel.setLayout(new GridLayout(1, 6, 2, 2));
 
 	//add button for sin
 	ActionListener sinListener = new SinListener();
-	JButton sin = new JButton("Sin");
+	JButton sin = new JButton("SIN");
 	sin.addActionListener(sinListener);
 	extraPanel.add(sin);
 	sin.setFont(BIGGER_FONT);
 
 	//add button for cos
 	ActionListener cosListener = new CosListener();
-	JButton cos = new JButton("Cos");
+	JButton cos = new JButton("COS");
 	cos.addActionListener(cosListener);
 	extraPanel.add(cos);
 	cos.setFont(BIGGER_FONT);
 	
 	//add button for tan
 	ActionListener tanListener = new TanListener();
-	JButton tan = new JButton("Tan");
+	JButton tan = new JButton("TAN");
 	tan.addActionListener(tanListener);
 	extraPanel.add(tan);
 	tan.setFont(BIGGER_FONT);
 	
 	//add button for x2
 	ActionListener x2Listener = new X2Listener();
-	JButton x2 = new JButton("x2");
+	JButton x2 = new JButton(" X²");
 	x2.addActionListener(x2Listener);
 	extraPanel.add(x2);
 	x2.setFont(BIGGER_FONT);
@@ -121,6 +121,13 @@ public class CalculatorGUI extends JFrame{
 	sqrt.addActionListener(sqrtListener);
 	extraPanel.add(sqrt);
 	sqrt.setFont(BIGGER_FONT);
+
+	//add button for binary converter
+	ActionListener biListener = new BiListener();
+	JButton bi = new JButton("BI");
+	bi.addActionListener(biListener);
+	extraPanel.add(bi);
+	bi.setFont(BIGGER_FONT);
 
 	//add buttons for key panel, which includes 1/x
 	keyPanel.setLayout(new GridLayout(4, 1, 2, 2));
@@ -220,6 +227,29 @@ public class CalculatorGUI extends JFrame{
 				}
 		}
 
+
+    
+    	        /**Action listener for binary converter*/
+		class BiListener implements ActionListener{
+				public void actionPerformed(ActionEvent e){
+						String s = displayField.getText();
+						int x = Integer.parseInt(s);
+						if (x == 0) {
+						    String binary = "0";
+						    displayField.setText(binary);
+						}
+						else{
+						String binary = "";
+						while (x > 0) {
+						    int rem = x % 2;
+						    binary = rem + binary;
+						    x = x / 2;
+						}
+						displayField.setText(binary);
+						}
+						
+				}
+		}
 
     /**Action listener for number keys and .
      */

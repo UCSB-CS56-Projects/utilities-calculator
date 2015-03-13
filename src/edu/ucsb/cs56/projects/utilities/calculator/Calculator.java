@@ -5,8 +5,8 @@ import java.lang.Math;
 
 /** Calculator class is the implementation of a simple calculator which peforms addition, subtraction, division, and multiplication, inverse, and any other calculator operations.
 
-@author Roeland Singer-Heinze
-@version CS56, S13, UCSB
+@author Fengyu Wang
+@version CS56, W15, UCSB
 
 */
 

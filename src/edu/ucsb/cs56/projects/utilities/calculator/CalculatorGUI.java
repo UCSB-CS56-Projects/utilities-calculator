@@ -47,7 +47,7 @@ public class CalculatorGUI extends JFrame{
 	JPanel buttonPanel = new JPanel(); //Where our numberic buttons will be including '.' and '+-'
 	JPanel operatorPanel = new JPanel(); //Where our operators /, *, -, + will be
 	JPanel keyPanel = new JPanel(); //Where our =, del, and c (clear) keys will be and 1/x as well
-	JPanel extraPanel = new JPanel(); // where sin, cos, tan, x^2
+	JPanel extraPanel = new JPanel(); // where sin, cos, tan, x^2, sqrt, and binary converter
 
         //add buttons for 1 through 9
 	ActionListener numListener = new NumListener(); //This is for all numeric buttons and '.'

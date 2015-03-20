@@ -3,12 +3,12 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
-
+import java.lang.Math;
 /** CalculatorGUI class which is a user interface for a calculator. 
  
 
-@author Roeland Singer-Heinze
-@version CS56, S13, UCSB
+@author Fengyu Wang
+@version CS56, W15, UCSB
 
  */
 
@@ -47,6 +47,7 @@ public class CalculatorGUI extends JFrame{
 	JPanel buttonPanel = new JPanel(); //Where our numberic buttons will be including '.' and '+-'
 	JPanel operatorPanel = new JPanel(); //Where our operators /, *, -, + will be
 	JPanel keyPanel = new JPanel(); //Where our =, del, and c (clear) keys will be and 1/x as well
+	JPanel extraPanel = new JPanel(); // where sin, cos, tan, x^2, sqrt, and binary converter
 
         //add buttons for 1 through 9
 	ActionListener numListener = new NumListener(); //This is for all numeric buttons and '.'
@@ -82,6 +83,51 @@ public class CalculatorGUI extends JFrame{
 	    operatorPanel.add(jb);
 	}
 
+
+	//add buttons for extra panel, which include sin, cos, tan, x^2
+	extraPanel.setLayout(new GridLayout(1, 6, 2, 2));
+
+	//add button for sin
+	ActionListener sinListener = new SinListener();
+	JButton sin = new JButton("SIN");
+	sin.addActionListener(sinListener);
+	extraPanel.add(sin);
+	sin.setFont(BIGGER_FONT);
+
+	//add button for cos
+	ActionListener cosListener = new CosListener();
+	JButton cos = new JButton("COS");
+	cos.addActionListener(cosListener);
+	extraPanel.add(cos);
+	cos.setFont(BIGGER_FONT);
+	
+	//add button for tan
+	ActionListener tanListener = new TanListener();
+	JButton tan = new JButton("TAN");
+	tan.addActionListener(tanListener);
+	extraPanel.add(tan);
+	tan.setFont(BIGGER_FONT);
+	
+	//add button for x2
+	ActionListener x2Listener = new X2Listener();
+	JButton x2 = new JButton(" X²");
+	x2.addActionListener(x2Listener);
+	extraPanel.add(x2);
+	x2.setFont(BIGGER_FONT);
+
+	//add button for sqrt
+	ActionListener sqrtListener = new SqrtListener();
+	JButton sqrt = new JButton("sqrt");
+	sqrt.addActionListener(sqrtListener);
+	extraPanel.add(sqrt);
+	sqrt.setFont(BIGGER_FONT);
+
+	//add button for binary converter
+	ActionListener biListener = new BiListener();
+	JButton bi = new JButton("BI");
+	bi.addActionListener(biListener);
+	extraPanel.add(bi);
+	bi.setFont(BIGGER_FONT);
 
 	//add buttons for key panel, which includes 1/x
 	keyPanel.setLayout(new GridLayout(4, 1, 2, 2));
@@ -122,6 +168,7 @@ public class CalculatorGUI extends JFrame{
 	content.add(buttonPanel, BorderLayout.WEST);
 	content.add(operatorPanel,BorderLayout.CENTER);
 	content.add(keyPanel,BorderLayout.EAST);
+	content.add(extraPanel,BorderLayout.SOUTH);
 
 	content.setBorder(BorderFactory.createEmptyBorder(10,10,10,10)); 
 
@@ -132,7 +179,77 @@ public class CalculatorGUI extends JFrame{
 	this.setResizable(false);
 	this.setLocationRelativeTo(null);
     }// end of our constructor
+		
 
+		/**Action listener for sin */
+	 	class SinListener implements ActionListener{
+				public void actionPerformed(ActionEvent e){
+						String s = displayField.getText();
+						double x = Math.sin(Double.parseDouble(s));
+						displayField.setText("" + x);
+				}
+		}
+		
+		/**Action listener for cos*/
+		class CosListener implements ActionListener{
+				public void actionPerformed(ActionEvent e){
+						String s = displayField.getText();
+						double x = Math.cos(Double.parseDouble(s));
+						displayField.setText("" + x);
+				}
+		}
+
+		/**Action listner for tan*/
+		class TanListener implements ActionListener{
+				public void actionPerformed(ActionEvent e){
+						String s = displayField.getText();
+						double x = Math.tan(Double.parseDouble(s));
+						displayField.setText("" + x);
+				}
+		}
+
+
+		/**Action listener for x^2 */
+		class X2Listener implements ActionListener{
+				public void actionPerformed(ActionEvent e){
+						String s = displayField.getText();
+						double x = Double.parseDouble(s)*Double.parseDouble(s);
+						displayField.setText("" + x);
+				}
+		}
+	
+		/**Action listener for sqrt*/
+		class SqrtListener implements ActionListener{
+				public void actionPerformed(ActionEvent e){
+						String s = displayField.getText();
+						double x = Math.sqrt(Double.parseDouble(s));
+						displayField.setText("" + x);
+				}
+		}
+
+
+    
+    	        /**Action listener for binary converter*/
+		class BiListener implements ActionListener{
+				public void actionPerformed(ActionEvent e){
+						String s = displayField.getText();
+						int x = Integer.parseInt(s);
+						if (x == 0) {
+						    String binary = "0";
+						    displayField.setText(binary);
+						}
+						else{
+						String binary = "";
+						while (x > 0) {
+						    int rem = x % 2;
+						    binary = rem + binary;
+						    x = x / 2;
+						}
+						displayField.setText(binary);
+						}
+						
+				}
+		}
 
     /**Action listener for number keys and .
      */
@@ -148,7 +265,9 @@ public class CalculatorGUI extends JFrame{
 		displayField.setText(digit);
 		startNumber = false; //Now it's not our start number
 		if (digit.equals("."))
+				displayField.setText(displayField.getText() + ".");
 		    decimalPoint = true; //To prevent two decimal points in input
+		   
 	    }
 
 	    else {
@@ -156,6 +275,8 @@ public class CalculatorGUI extends JFrame{
 		displayField.setText(displayField.getText() + digit);
                 if (digit.equals("."))
                     decimalPoint = true; //To prevent two decimal points in input
+
+        
 
 	    }
 	}
